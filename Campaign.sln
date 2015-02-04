@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign", "Campaign\Campaign.csproj", "{11C9B5CA-CFBE-48B0-BF83-3F7E02CB1381}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampaignTests", "CampaignTests\CampaignTests.csproj", "{1BAB371C-DD19-44DC-AE7D-991CB1C30E57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{11C9B5CA-CFBE-48B0-BF83-3F7E02CB1381}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C9B5CA-CFBE-48B0-BF83-3F7E02CB1381}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C9B5CA-CFBE-48B0-BF83-3F7E02CB1381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BAB371C-DD19-44DC-AE7D-991CB1C30E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAB371C-DD19-44DC-AE7D-991CB1C30E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAB371C-DD19-44DC-AE7D-991CB1C30E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAB371C-DD19-44DC-AE7D-991CB1C30E57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
