@@ -23,6 +23,18 @@ namespace Campaign
         public MainWindow()
         {
             InitializeComponent();
+            SetCampaignList();
+        }
+
+        private void SetCampaignList()
+        {
+            var campaigns = Panel.AllCampaigns();
+            foreach (string camp in campaigns)
+            {
+                var newPanel = new TextBox();
+                newPanel.Text = camp;
+                CampaignList.Children.Add(newPanel);
+            }
         }
     }
 }

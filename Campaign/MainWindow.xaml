@@ -1,8 +1,8 @@
 ﻿<Window x:Class="Campaign.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="525" Width="525">
     <Grid>
-        
+        <StackPanel Width="525" Height="300" Orientation="Vertical" Name="CampaignList"></StackPanel>
     </Grid>
 </Window>
