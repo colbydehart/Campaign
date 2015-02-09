@@ -1,10 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestStack;
 using TestStack.White;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 using System.IO;
+using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.ListBoxItems;
 
 namespace CampaignTests
 {
@@ -29,14 +32,22 @@ namespace CampaignTests
         [TestMethod]
         public void TestZeroState()
         {
-            TextBox
+           ListBox items = window.Get<ListBox>("CampaignList");
+           Assert.AreEqual(items.Items.ToArray().Length, 0);
+           var button = window.Get<Button>("AddCampaign");
+           Assert.AreEqual(button.Text, "Add");
+        }
 
-            Assert.IsTrue(true);
-            //Assert.IsTrue(left_button.Enabled);
-            //Assert.IsTrue(right_button.Enabled);
-            //Assert.IsTrue(text_box.IsReadOnly);
-            //Assert.AreEqual(text_box.Text, "");
-            //Assert.IsFalse(reset_button.Enabled);
+        [TestMethod]
+        public void CreateACampaign()
+        {
+            TextBox txt = window.Get<TextBox>("NewCampaignTextbox");
+            txt.Text = "Hello World";
+            Button btn = window.Get<Button>("AddCampaign");
+            btn.Click();
+            Assert.AreEqual("", txt.Text);
+            ListBox lst = window.Get<ListBox>("CampaignList");
+            Assert.AreEqual(1, lst.Items.ToArray().Length);
         }
 
         [ClassCleanup]

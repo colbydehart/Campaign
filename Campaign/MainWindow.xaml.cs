@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Campaign.Model;
 
 namespace Campaign
 {
@@ -28,13 +29,14 @@ namespace Campaign
 
         private void SetCampaignList()
         {
-            var campaigns = Panel.AllCampaigns();
-            foreach (string camp in campaigns)
-            {
-                var newPanel = new TextBox();
-                newPanel.Text = camp;
-                CampaignList.Children.Add(newPanel);
-            }
+            var campaigns = Camp.All();
+            CampaignList.DataContext = campaigns;
+        }
+
+        private void AddCampaign_Click(object sender, RoutedEventArgs e)
+        {
+            new Camp(NewCampaignTextbox.Text);
+            NewCampaignTextbox.Clear();
         }
     }
 }
