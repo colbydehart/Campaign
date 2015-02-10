@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Campaign.Model;
+using Campaign.Repository;
 
 namespace Campaign
 {
@@ -23,20 +24,18 @@ namespace Campaign
     {
         public MainWindow()
         {
-            InitializeComponent();
             SetCampaignList();
+            InitializeComponent();
         }
 
         private void SetCampaignList()
         {
-            var campaigns = Camp.All();
-            CampaignList.DataContext = campaigns;
+            var repo = new CampaignRepository();
+            repo.Add(new Camp("Hello"));
         }
 
         private void AddCampaign_Click(object sender, RoutedEventArgs e)
         {
-            new Camp(NewCampaignTextbox.Text);
-            NewCampaignTextbox.Clear();
         }
     }
 }

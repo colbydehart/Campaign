@@ -6,7 +6,7 @@
         <Label FontSize="30" Margin="10,10,-9,0" FontFamily="Open Sans" Content="Campaigns" FontWeight="Bold"/>
         <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="2" Margin="10,65,0,0" VerticalAlignment="Top" Width="454" RenderTransformOrigin="0.5,0.5">
         </Border>
-        <ListBox Margin="10,72,10,100" Name="CampaignList" ItemsSource="{Binding}"/>
+        <ListBox Margin="10,72,10,100" Name="CampaignList" ItemsSource="{Binding Path=Name}"/>
         <TextBox Name="NewCampaignTextbox" Margin="10,368,81,52"></TextBox>
         <Button Margin="398,370,10,52" Name="AddCampaign" Click="AddCampaign_Click">Add</Button>
     </Grid>

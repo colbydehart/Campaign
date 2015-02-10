@@ -7,21 +7,16 @@ using System.Threading.Tasks;
 
 namespace Campaign.Model
 {
-    class Camp
+    public class Camp
     {
-        private static ObservableCollection<string> campaigns = new ObservableCollection<string>(); 
-        private string name;
+
+        public int CampId { get; set; }
         public string Name { get; set; }
 
         public Camp(string name)
         {
-            this.name = name;
-            campaigns.Add(name);
+            this.Name = name;
         }
 
-        public static ObservableCollection<string> All()
-        {
-            return campaigns;
-        }
     }
 }
