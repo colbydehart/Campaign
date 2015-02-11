@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Campaign.Model;
+using CampaignMaker.Model;
 
-namespace Campaign.Repository
+namespace CampaignMaker.Repository
 {
     public interface ICampaignRepository
     {
         int GetCount(); 
-        void Add(Camp E); 
-        void Delete(Camp E); 
+        void Add(Model.Campaign E); 
+        void Delete(Model.Campaign E); 
         void Clear(); 
-        IEnumerable<Camp> All(); 
-        Camp GetById(int id); 
+        IEnumerable<Model.Campaign> All(); 
+        Model.Campaign GetById(int id); 
  
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace Campaign.Repository
+namespace CampaignMaker.Repository
 {
     public class CampaignRepository : ICampaignRepository
     {
@@ -14,27 +14,29 @@ namespace Campaign.Repository
         public CampaignRepository()
         {
             _db = new CampaignContext();
+            _db.Campaigns.Load();
         }
 
-        public DbSet<Model.Camp> GetDbSet()
+        public DbSet<Model.Campaign> GetDbSet()
         {
             return _db.Campaigns;
         }
 
         public int GetCount()
         {
-            throw new NotImplementedException();
+            return this.All().Count<Model.Campaign>();
         }
 
-        public void Add(Model.Camp C)
+        public void Add(Model.Campaign C)
         {
-            _db.Campaigns.Add(C);
+            _db.Campaigns.Local.Add(C);
             _db.SaveChanges();
         }
 
-        public void Delete(Model.Camp E)
+        public void Delete(Model.Campaign C)
         {
-            throw new NotImplementedException();
+            _db.Campaigns.Remove(C);
+            _db.SaveChanges();
         }
 
         public void Clear()
@@ -43,14 +45,21 @@ namespace Campaign.Repository
             _db.SaveChanges();
         }
 
-        public IEnumerable<Model.Camp> All()
+        public IEnumerable<Model.Campaign> All()
         {
-            throw new NotImplementedException();
+            var q = from c in _db.Campaigns
+                    select c;
+
+            return q.ToList<Model.Campaign>();
         }
 
-        public Model.Camp GetById(int id)
+        public Model.Campaign GetById(int id)
         {
-            throw new NotImplementedException();
+            var que = from c in _db.Campaigns
+                      where c.CampaignId == id
+                      select c;
+
+            return que.First<Model.Campaign>();
         }
 
         public void Dispose()

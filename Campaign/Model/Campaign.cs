@@ -5,18 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campaign.Model
+namespace CampaignMaker.Model
 {
-    public class Camp
+    public class Campaign
     {
 
-        public int CampId { get; set; }
+        public int CampaignId { get; set; }
         public string Name { get; set; }
 
-        public Camp(string name)
+        public Campaign(string name)
         {
             this.Name = name;
         }
+
+        public Campaign() { }
 
     }
 }

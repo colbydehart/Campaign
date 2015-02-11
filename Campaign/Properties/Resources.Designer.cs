@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Campaign.Properties
+namespace CampaignMaker.Properties
 {
 
 

@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Campaign.Model;
-using Campaign.Repository;
+using CampaignMaker.Model;
+using CampaignMaker.Repository;
 
-namespace Campaign
+namespace CampaignMaker
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -31,7 +31,7 @@ namespace Campaign
         private void SetCampaignList()
         {
             var repo = new CampaignRepository();
-            repo.Add(new Camp("Hello"));
+            repo.Add(new Campaign("Hello"));
         }
 
         private void AddCampaign_Click(object sender, RoutedEventArgs e)

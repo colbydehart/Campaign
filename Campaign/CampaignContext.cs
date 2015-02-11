@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Campaign.Model;
+using CampaignMaker.Model;
 
-namespace Campaign
+namespace CampaignMaker
 {
     class CampaignContext : DbContext
     {
-        public DbSet<Camp> Campaigns { get; set; }
+        public DbSet<Model.Campaign> Campaigns { get; set; }
+        public DbSet<Model.Panel> Panels { get; set; }
     }
 }
