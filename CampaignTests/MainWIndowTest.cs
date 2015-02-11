@@ -47,7 +47,8 @@ namespace CampaignTests
             btn.Click();
             Assert.AreEqual("", txt.Text);
             ListBox lst = window.Get<ListBox>("CampaignList");
-            Assert.AreEqual(1, lst.Items.ToArray().Length);
+            Assert.AreEqual(1, lst.Items.Count);
+            Assert.AreEqual("Hello World", lst.Items[0].Text);
         }
 
         [ClassCleanup]
