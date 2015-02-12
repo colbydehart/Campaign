@@ -13,71 +13,78 @@ namespace CampaignTests
     public class CampaignRepositoryTest
     {
         [TestMethod]
-        public void GetAllTest()
+        public void CampaignGetAllTest()
         {
             CampaignRepository repo = new CampaignRepository();
-            repo.Clear();
+            repo.ClearCampaigns();
 
-            repo.Add(new Campaign("DRAGONS!!!"));
-            repo.Add(new Campaign("ELVES!!!"));
-            var all = repo.All();
+            repo.AddCampaign(new Campaign("DRAGONS!!!"));
+            repo.AddCampaign(new Campaign("ELVES!!!"));
+            var all = repo.AllCampaigns();
             Assert.AreEqual(2, (all as List<Campaign>).Count);
         }
 
         [TestMethod]
-        public void AddTest()
+        public void CampaignAddTest()
         {
             CampaignRepository repo = new CampaignRepository();
-            repo.Clear();
-            repo.Add(new Campaign("DRAGONS!!!"));
-            repo.Add(new Campaign("ELVES!!!"));
-            Assert.AreEqual(2, repo.GetDbSet().Local.Count);
+            repo.ClearCampaigns();
+            repo.AddCampaign(new Campaign("DRAGONS!!!"));
+            repo.AddCampaign(new Campaign("ELVES!!!"));
+            Assert.AreEqual(2, repo.GetObservableCampaigns().Count);
         }
 
         [TestMethod]
-        public void DeleteTest()
+        public void CampaignDeleteTest()
         {
             CampaignRepository repo = new CampaignRepository();
-            repo.Clear();
+            repo.ClearCampaigns();
             var cmp = new Campaign("DWARVES!!!");
-            repo.Add(cmp);
-            Assert.AreEqual(1, repo.GetCount());
-            repo.Delete(cmp);
-            Assert.AreEqual(0, repo.GetCount());
+            repo.AddCampaign(cmp);
+            Assert.AreEqual(1, repo.GetCampaignCount());
+            repo.DeleteCampaign(cmp);
+            Assert.AreEqual(0, repo.GetCampaignCount());
         }
 
         [TestMethod]
-        public void GetCountTest()
+        public void CampaignGetCountTest()
         {
             CampaignRepository repo = new CampaignRepository();
-            repo.Clear();
-            Assert.AreEqual(0, repo.GetCount());
-            repo.Add(new Campaign("ELVES!!!"));
-            Assert.AreEqual(1, repo.GetCount());
-            repo.Add(new Campaign("DRAGONS!!!"));
-            Assert.AreEqual(2, repo.GetCount());
+            repo.ClearCampaigns();
+            Assert.AreEqual(0, repo.GetCampaignCount());
+            repo.AddCampaign(new Campaign("ELVES!!!"));
+            Assert.AreEqual(1, repo.GetCampaignCount());
+            repo.AddCampaign(new Campaign("DRAGONS!!!"));
+            Assert.AreEqual(2, repo.GetCampaignCount());
             
         }
 
         [TestMethod]
-        public void GetByIdTest()
+        public void CampaignGetByIdTest()
         {
             CampaignRepository repo = new CampaignRepository();
-            repo.Clear();
-            repo.Add(new Campaign("DRAGONSSS!!!"));
-            var cmp = repo.GetDbSet().Local[0];
-            Assert.AreEqual(cmp, repo.GetById(cmp.CampaignId));
+            repo.ClearCampaigns();
+            repo.AddCampaign(new Campaign("DRAGONSSS!!!"));
+            var cmp = repo.GetObservableCampaigns()[0];
+            Assert.AreEqual(cmp, repo.GetCampaignById(cmp.CampaignId));
         }
 
         [TestMethod]
-        public void ClearTest()
+        public void CampaignClearTest()
         {
             var repo = new CampaignRepository();
-            repo.Add(new Campaign("DRAGONS!!!"));
-            repo.Add(new Campaign("ELVES!!!"));
-            Assert.IsTrue(repo.GetDbSet().Local.Count > 1);
-            repo.Clear();
-            Assert.AreEqual(0, repo.GetDbSet().Local.Count);
+            repo.AddCampaign(new Campaign("DRAGONS!!!"));
+            repo.AddCampaign(new Campaign("ELVES!!!"));
+            Assert.IsTrue(repo.GetObservableCampaigns().Count > 1);
+            repo.ClearCampaigns();
+            Assert.AreEqual(0, repo.GetObservableCampaigns().Count);
         }
+
+        public Campaign camp;
+        public Panel adv;
+        public Panel pan1;
+        public Panel pan2;
+
+
     }
 }

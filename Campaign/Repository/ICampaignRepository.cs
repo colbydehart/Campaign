@@ -9,12 +9,24 @@ namespace CampaignMaker.Repository
 {
     public interface ICampaignRepository
     {
-        int GetCount(); 
-        void Add(Model.Campaign E); 
-        void Delete(Model.Campaign E); 
-        void Clear(); 
-        IEnumerable<Model.Campaign> All(); 
-        Model.Campaign GetById(int id); 
- 
+        // Campaign methods
+        int GetCampaignCount(); 
+        void AddCampaign(Model.Campaign E); 
+        void DeleteCampaign(Model.Campaign E); 
+        void ClearCampaigns(); 
+        IEnumerable<Model.Campaign> AllCampaigns(); 
+        Model.Campaign GetCampaignById(int id); 
+        //Panel methods
+        int GetPanelCount(); 
+        void AddAdventure(Panel P); 
+        void AddPanel(Panel P, int adventureId, int parentId); 
+        void DeletePanel(Panel P); 
+        void ClearPanels(); 
+        Panel GetPanelById(int id); 
+        IEnumerable<Panel> AllPanels();
+        IEnumerable<Panel> AllAdventures();
+        IEnumerable<Panel> PanelsForAdventure(int adventureId);
+        IEnumerable<Panel> Parents(int childID);
+        IEnumerable<Panel> Children(int parentId);
     }
 }

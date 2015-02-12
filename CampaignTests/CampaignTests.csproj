@@ -69,6 +69,7 @@
     <Compile Include="MainWIndowTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaignRepositoryTest.cs" />
+    <Compile Include="PanelRepoTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

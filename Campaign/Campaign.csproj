@@ -71,7 +71,21 @@
     <Compile Include="Migrations\201502111750408_AddHashField.Designer.cs">
       <DependentUpon>201502111750408_AddHashField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502121728138_AddedRelationshipChildParent.cs" />
+    <Compile Include="Migrations\201502121728138_AddedRelationshipChildParent.Designer.cs">
+      <DependentUpon>201502121728138_AddedRelationshipChildParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502121748259_addedAdventureID.cs" />
+    <Compile Include="Migrations\201502121748259_addedAdventureID.Designer.cs">
+      <DependentUpon>201502121748259_addedAdventureID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502122105366_relationshipModel.cs" />
+    <Compile Include="Migrations\201502122105366_relationshipModel.Designer.cs">
+      <DependentUpon>201502122105366_relationshipModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Campaign.cs" />
+    <Compile Include="Model\Relationship.cs" />
     <Compile Include="Repository\ICampaignRepository.cs" />
     <Compile Include="Repository\CampaignRepository.cs" />
     <Page Include="MainWindow.xaml">
@@ -89,7 +103,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Campaign.cs" />
     <Compile Include="Model\Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -109,6 +122,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502111750408_AddHashField.resx">
       <DependentUpon>201502111750408_AddHashField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502121728138_AddedRelationshipChildParent.resx">
+      <DependentUpon>201502121728138_AddedRelationshipChildParent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502121748259_addedAdventureID.resx">
+      <DependentUpon>201502121748259_addedAdventureID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502122105366_relationshipModel.resx">
+      <DependentUpon>201502122105366_relationshipModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

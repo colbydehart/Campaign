@@ -22,6 +22,7 @@ namespace CampaignMaker
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CampaignRepository repo;
         public MainWindow()
         {
             SetCampaignList();
@@ -30,8 +31,9 @@ namespace CampaignMaker
 
         private void SetCampaignList()
         {
-            var repo = new CampaignRepository();
-            repo.Add(new Campaign("Hello"));
+            repo = new CampaignRepository();
+            repo.AddCampaign(new Campaign("Hello"));
+            CampaignList.DataContext = repo.AllCampaigns();
         }
 
         private void AddCampaign_Click(object sender, RoutedEventArgs e)

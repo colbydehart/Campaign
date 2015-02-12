@@ -12,5 +12,6 @@ namespace CampaignMaker
     {
         public DbSet<Model.Campaign> Campaigns { get; set; }
         public DbSet<Model.Panel> Panels { get; set; }
+        public DbSet<Model.Relationship> Relationships { get; set; }
     }
 }
