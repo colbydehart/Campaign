@@ -69,9 +69,11 @@ namespace CampaignMaker
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
+            repo.SaveChanges();
             CurrentCampaign = null;
             CurrentAdventure = null;
             CurrentPanel = null;
+            Title.Content = "Campaigns";
 
             CampaignList.DataContext = repo.GetObservableCampaigns();
             Editor.Visibility = Visibility.Hidden;
@@ -95,6 +97,12 @@ namespace CampaignMaker
         {
             CurrentPanel = P;
             CurrentAdventure = repo.GetPanelById(P.AdventureId);
+            Parents.Visibility = CurrentPanel.PanelId == CurrentAdventure.PanelId ?
+                Visibility.Hidden : Visibility.Visible;
+            AddParent.Visibility = Parents.Visibility;
+            Delete.Visibility = Parents.Visibility;
+
+            Title.Content = CurrentAdventure.Title;
             Editor.DataContext = P;
             Parents.ItemsSource = repo.Parents(P.PanelId);
             Children.ItemsSource = repo.Children(P.PanelId);
@@ -104,13 +112,31 @@ namespace CampaignMaker
         {
             repo.SaveChanges();
         }
+
         private void AddPanel(object sender, RoutedEventArgs e)
         {
             repo.SaveChanges();
-            var p = new Model.Panel("Insert a title", "Write content here", CurrentCampaign.CampaignId);
+            var p = new Model.Panel(NewChild.Text, "Write content here", CurrentCampaign.CampaignId);
             repo.AddPanel(p, CurrentAdventure.PanelId, CurrentPanel.PanelId);
+            NewChild.Text = "";
+            editPanel(p);
+        }
+        
+        private void AddParentClick(object sender, RoutedEventArgs e)
+        {
+            repo.SaveChanges();
+            var p = new Model.Panel(NewParent.Text, "Write content here", CurrentCampaign.CampaignId);
+            repo.AddParentToChild(p, CurrentPanel);
+            NewParent.Text = "";
             editPanel(p);
         }
 
+        private void DeletePanelClick(object sender, RoutedEventArgs e)
+        {
+            var pars = repo.Parents(CurrentPanel.PanelId) as List<Model.Panel>;
+            var p = pars.Count < 1 ? CurrentAdventure : pars[0];
+            repo.DeletePanel(CurrentPanel);
+            editPanel(p);
+        }
     }
 }

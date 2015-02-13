@@ -147,6 +147,7 @@ namespace CampaignMaker.Repository
 
         public void AddParentToChild(Model.Panel par, Model.Panel chi)
         {
+            par.AdventureId = chi.AdventureId;
             _db.Panels.Add(par);
             _db.SaveChanges();
             _db.Relationships.Add(new Model.Relationship(chi.PanelId, par.PanelId));
