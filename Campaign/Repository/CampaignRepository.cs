@@ -86,6 +86,7 @@ namespace CampaignMaker.Repository
         {
             P.AdventureId = adventureId;
             _db.Panels.Add(P);
+            _db.SaveChanges();
             _db.Relationships.Add(new Model.Relationship(P.PanelId, parentId));
             _db.SaveChanges();
         }
@@ -125,6 +126,16 @@ namespace CampaignMaker.Repository
             return q.ToList<Model.Panel>();
         }
 
+        public IEnumerable<Model.Panel> AdventuresForCampaign(int campId)
+        {
+            var q = from p in _db.Panels
+                    where p.CampaignId == campId
+                    where p.AdventureId == p.PanelId
+                    select p;
+
+            return q.ToList<Model.Panel>();
+        }
+
         public IEnumerable<Model.Panel> PanelsForAdventure(int adventureId)
         {
             var q = from p in _db.Panels
@@ -137,6 +148,7 @@ namespace CampaignMaker.Repository
         public void AddParentToChild(Model.Panel par, Model.Panel chi)
         {
             _db.Panels.Add(par);
+            _db.SaveChanges();
             _db.Relationships.Add(new Model.Relationship(chi.PanelId, par.PanelId));
             _db.SaveChanges();
         }
@@ -144,8 +156,8 @@ namespace CampaignMaker.Repository
         public IEnumerable<Model.Panel> Parents(int childID)
         {
             var q = from p in _db.Panels
-                    join rel in _db.Relationships on childID equals rel.ChildId
-                    where p.PanelId == rel.ParentId
+                    join r in _db.Relationships on p.PanelId equals r.ParentId
+                    where r.ChildId == childID
                     select p;
 
             return q.ToList<Model.Panel>();
@@ -153,7 +165,12 @@ namespace CampaignMaker.Repository
 
         public IEnumerable<Model.Panel> Children(int parentId)
         {
-            throw new NotImplementedException();
+            var q = from p in _db.Panels
+                    join r in _db.Relationships on p.PanelId equals r.ChildId
+                    where r.ParentId == parentId
+                    select p;
+
+            return q.ToList<Model.Panel>();
         }
 
         public void Dispose()
@@ -162,5 +179,15 @@ namespace CampaignMaker.Repository
         }
 
 
+
+        public void ClearRelationships()
+        {
+            _db.Relationships.RemoveRange(_db.Relationships.ToList<Model.Relationship>());
+        }
+
+        internal void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
     }
 }

@@ -147,7 +147,7 @@ namespace CampaignTests
             var chi2 = new Panel("Far", "Scape", cmp.CampaignId);
             repo.AddPanel(chi2, adv.AdventureId, adv.PanelId);
 
-            Assert.AreEqual(2, repo.Children(adv.PanelId));
+            Assert.AreEqual(2, (repo.Children(adv.PanelId) as List<Panel>).Count);
         }
 
         [TestMethod]
@@ -178,6 +178,7 @@ namespace CampaignTests
             var repo = new CampaignRepository();
             repo.ClearPanels();
             repo.ClearCampaigns();
+            repo.ClearRelationships(); 
         }
 
     }

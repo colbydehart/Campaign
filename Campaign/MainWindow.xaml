@@ -3,11 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="525" Width="525" Background="LightGray">
     <Grid Background="White" Margin="22,21,22.4,22.2">
-        <Label FontSize="30" Margin="10,10,-9,0" FontFamily="Open Sans" Content="Campaigns" FontWeight="Bold"/>
+        <Label FontSize="30" Margin="10,10,-9,0" FontFamily="Open Sans" Content="Campaigns" FontWeight="Bold" Name="Title"/>
+        <Button x:Name="CampaignBreadcrumb" Visibility="Hidden" Content="{Binding Path=Name}" Margin="186,29,152.4,392" />
+        <Button x:Name="AdventureBreadcrumb" Visibility="Hidden" Content="{Binding Path=Title}" Margin="321,29,18,392" />
         <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="2" Margin="10,65,0,0" VerticalAlignment="Top" Width="454" RenderTransformOrigin="0.5,0.5">
         </Border>
-        <ListBox Margin="10,72,10,100" Name="CampaignList" ItemsSource="{Binding Path=Name}"/>
-        <TextBox Name="NewCampaignTextbox" Margin="10,368,81,52"></TextBox>
+        <ListBox Margin="10,72,10,100" Name="CampaignList" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}" Click="Campaign_Show"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Margin="10,72,10,100" Name="AdventureList" Visibility="Hidden" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Title}" Click="EditClickedPanel"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox Name="NewTextbox" Margin="10,368,81,52"></TextBox>
         <Button Margin="398,370,10,52" Name="AddCampaign" Click="AddCampaign_Click">Add</Button>
+        <Button Margin="398,370,10,52" Name="AddAdventure" Visibility="Hidden" Click="AddAdventure_Click">Add</Button>
+        <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="Home" Click="Home_Click"/>
+        <Grid HorizontalAlignment="Left" Name="Editor" Background="CadetBlue"  Visibility="Hidden" Height="328" VerticalAlignment="Top" Width="454" Margin="10,72,0,0">
+            <ItemsControl  Name="Parents" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,10,283" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="0,10,0,10" Width="94" Content="{Binding Title}" Click="EditClickedPanel"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl  Name="Children">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,263,20,20" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="0,10,0,10" Width="94" Content="{Binding Title}" Click="EditClickedPanel"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBox Text="{Binding Title}" Margin="10,45,10,257"></TextBox>
+            <TextBox Text="{Binding Content}" Margin="10,76,8,70"/>
+            <Button Width="70" Click="SavePanel" Margin="384,308,0,0">Save</Button>
+            <Button Width="70" Click="AddPanel" Margin="257,308,127,0">Add Panel</Button>
+        </Grid>
     </Grid>
 </Window>
