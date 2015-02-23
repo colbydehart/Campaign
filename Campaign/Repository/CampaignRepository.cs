@@ -109,7 +109,10 @@ namespace CampaignMaker.Repository
             var q = from p in _db.Panels
                     where p.PanelId == id
                     select p;
-            return q.ToList<Model.Panel>().First<Model.Panel>();
+            var list = q.ToList<Model.Panel>();
+            if (list.Count < 1)
+                throw new IndexOutOfRangeException("Panel does not exist");
+            return list.First<Model.Panel>();
         }
 
         public IEnumerable<Model.Panel> AllPanels()
@@ -186,9 +189,15 @@ namespace CampaignMaker.Repository
             _db.Relationships.RemoveRange(_db.Relationships.ToList<Model.Relationship>());
         }
 
-        internal void SaveChanges()
+        public void SaveChanges()
         {
             _db.SaveChanges();
+        }
+
+        public void CreateRelationship(Model.Panel parent, Model.Panel child)
+        {
+            _db.Relationships.Add(new Model.Relationship(child.PanelId, parent.PanelId));
+            SaveChanges();
         }
     }
 }

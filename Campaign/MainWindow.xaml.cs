@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CampaignMaker.Model;
 using CampaignMaker.Repository;
+using System.Text.RegularExpressions;
 
 namespace CampaignMaker
 {
@@ -116,19 +117,68 @@ namespace CampaignMaker
         private void AddPanel(object sender, RoutedEventArgs e)
         {
             repo.SaveChanges();
-            var p = new Model.Panel(NewChild.Text, "Write content here", CurrentCampaign.CampaignId);
-            repo.AddPanel(p, CurrentAdventure.PanelId, CurrentPanel.PanelId);
-            NewChild.Text = "";
-            editPanel(p);
+            // check for reference
+            var text = NewChild.Text;
+            var m = new Regex(@"^@(\d+)").Match(text);
+            if (m.Success)
+            {
+                Model.Panel p;
+                try
+                {
+                    p = repo.GetPanelById(Int32.Parse(m.Groups[1].Value));
+                    repo.CreateRelationship(CurrentPanel, p);
+                    NewChild.Text = "";
+                    editPanel(p);
+                }
+                catch (IndexOutOfRangeException err)
+                {
+                    NewChild.Text = "";
+                    System.Windows.MessageBox.Show(err.Message);
+                }
+            }
+            else
+            {
+                var p = new Model.Panel(NewChild.Text, "Write content here", CurrentCampaign.CampaignId);
+                repo.AddPanel(p, CurrentAdventure.PanelId, CurrentPanel.PanelId);
+                NewChild.Text = "";
+                editPanel(p);
+            }
         }
         
         private void AddParentClick(object sender, RoutedEventArgs e)
         {
+            if (CurrentPanel == CurrentAdventure)
+            {
+                MessageBox.Show("Cannot add parents to root adventure");
+                return;
+            }
             repo.SaveChanges();
-            var p = new Model.Panel(NewParent.Text, "Write content here", CurrentCampaign.CampaignId);
-            repo.AddParentToChild(p, CurrentPanel);
-            NewParent.Text = "";
-            editPanel(p);
+            //check for reference
+            var text = NewParent.Text;
+            var m = new Regex(@"^@(\d+)").Match(text);
+            if (m.Success)
+            {
+                Model.Panel p;
+                try
+                {
+                    p = repo.GetPanelById(Int32.Parse(m.Groups[1].Value));
+                    repo.CreateRelationship(p, CurrentPanel);
+                    NewParent.Text = "";
+                    editPanel(p);
+                }
+                catch (IndexOutOfRangeException err)
+                {
+                    NewParent.Text = "";
+                    System.Windows.MessageBox.Show(err.Message);
+                }
+            }
+            else
+            {
+                var p = new Model.Panel(text, "Write content here", CurrentCampaign.CampaignId);
+                repo.AddParentToChild(p, CurrentPanel);
+                NewParent.Text = "";
+                editPanel(p);
+            }
         }
 
         private void DeletePanelClick(object sender, RoutedEventArgs e)

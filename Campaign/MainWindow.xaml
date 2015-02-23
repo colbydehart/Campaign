@@ -26,7 +26,7 @@
         <Button Margin="398,370,10,52" Name="AddCampaign" Click="AddCampaign_Click">Add</Button>
         <Button Margin="398,370,10,52" Name="AddAdventure" Visibility="Hidden" Click="AddAdventure_Click">Add</Button>
         <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="Home" Click="Home_Click"/>
-        <Grid HorizontalAlignment="Left" Name="Editor" Background="Gainsboro"  Visibility="Visible" Height="382" VerticalAlignment="Top" Width="454" Margin="10,60,0,0">
+        <Grid HorizontalAlignment="Left" Name="Editor" Background="Gainsboro"  Visibility="Hidden" Height="382" VerticalAlignment="Top" Width="454" Margin="10,60,0,0">
             <TextBox Text="{Binding Title}" Margin="50,89,10,267"></TextBox>
             <TextBox Text="{Binding Content}" Margin="10,120,7,126"/>
             <Label Content="{Binding PanelId, StringFormat=id:{0}}" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="35" Height="26"/>
